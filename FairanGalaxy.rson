@@ -1,0 +1,488 @@
+{
+    "FileID": 573785173,
+    "FileVersion": 8,
+    "ViewPos.x": -594,
+    "ViewPos.y": -473,
+    "ScriptName": "FGal",
+    "ScriptFileOut": "D:\\script.scr",
+    "ScriptTextOut": "D:\\script_rus.txt",
+    "LangDatIn": "",
+    "LangDatOut": "",
+    "MainDatIn": "",
+    "MainDatOut": "",
+    "CacheDatIn": "",
+    "CacheDatOut": "",
+    "ExportLang": false,
+    "Visual.Objects": 
+    [
+        {
+            "Groups": 
+            [
+                {
+                    "Type": "TGroup",
+                    "Name": "GroupNew",
+                    "Pos.x": 190,
+                    "Pos.y": 190,
+                    "Parent": -1,
+                    "#": 0,
+                    "Owner": 62,
+                    "Group.Type": 126,
+                    "CntShipMin": 1,
+                    "CntShipMax": 1,
+                    "SpeedMin": 100,
+                    "SpeedMax": 10000,
+                    "Weapon": 0,
+                    "CargoHook": 0,
+                    "EmptySpace": 0,
+                    "AddPlayer": true,
+                    "StatusTraderMin": 0,
+                    "StatusTraderMax": 100,
+                    "StatusWarriorMin": 0,
+                    "StatusWarriorMax": 100,
+                    "StatusPirateMin": 0,
+                    "StatusPirateMax": 100,
+                    "DistSearch": 10000,
+                    "Dialog": -1,
+                    "StrengthMin": "0",
+                    "StrengthMax": "0",
+                    "Ruins": ""
+                }
+            ],
+            "Operations": 
+            [
+                {
+                    "Type": "Top",
+                    "Name": "",
+                    "Pos.x": 300,
+                    "Pos.y": 120,
+                    "Parent": -1,
+                    "#": 0,
+                    "Code.Type": "Init",
+                    "Code": 
+                    [
+                        "// массив для проверки выпадения одинаковых систем в цикле",
+                        "  r=1;",
+                        "  f=1;",
+                        "  bans=newarray(1);",
+                        "  // чтобы дабомассив не сделал нулевой элемент = 0 (добавим такой, который никогда не выпадет в цикле)",
+                        "  bans[0]=GalaxyStars();",
+                        "  // массив для проверки выпадения одинаковых фонов систем в цикле",
+                        "  banf=newarray(1);",
+                        "  banf[0]=200;",
+                        "  // активен ли мод EvoBG, если да, то добавим в массив его исключения",
+                        "  if(findsubstr(GetMainData('Data.Script.Mod_EvoBG'),'Mod_EvoBG')==9)",
+                        "  {",
+                        "      free(bans);",
+                        "      arraychange(bans,8);",
+                        "      r=8;",
+                        "      bans[0]=46;",
+                        "      bans[1]=47;",
+                        "      bans[2]=48;",
+                        "      bans[3]=56;",
+                        "      bans[4]=57;",
+                        "      bans[5]=58;",
+                        "      bans[6]=61;",
+                        "      bans[7]=62;",
+                        "  }",
+                        "  // раскидаем фоны по галактике",
+                        "  for (i=1;i<=40;i=i+1)",
+                        "  {",
+                        "      m=0; n=0;",
+                        "      systema=Rnd(0,(GalaxyStars()-2)); // уникальные пиратские не трогаем",
+                        "          // затрет ли наш фон фон из EvoBG или уже выпавший ранее",
+                        "          while (m!=r)",
+                        "          {",
+                        "              if(systema==bans[m])",
+                        "              {",
+                        "                  n=1;",
+                        "                  i=i-1;",
+                        "                  break;",
+                        "              }",
+                        "              else m=m+1;",
+                        "          }",
+                        "      // если проверка пройдена, спокойно меняем фон",
+                        "      if(n!=1)",
+                        "      {",
+                        "          fon=Rnd(87,GetMainData('Data.Last_Fone')); m=0;",
+                        "              // проверка на повторное выпадение фона",
+                        "              while (m!=f)",
+                        "              {",
+                        "                  if(fon==banf[m])",
+                        "                  {",
+                        "                      n=2;",
+                        "                      i=i-1;",
+                        "                      break;",
+                        "                  }",
+                        "                  else m=m+1;",
+                        "              }",
+                        "          if(n!=2)",
+                        "          {",
+                        "              StarFonImage(GalaxyStar(systema),fon);",
+                        "              // добавляем успешно присовенный фон и систему в исключения",
+                        "              r=ArrayAdd(bans,systema);",
+                        "              f=ArrayAdd(banf,fon);",
+                        "          }",
+                        "      }",
+                        "  }",
+                        "  // очистим старый массив и заполним его списком наших звезд",
+                        "  free(banf);",
+                        "  arraychange(banf,11);",
+                        "  banf[0]='Star.NeutronStar';",
+                        "  banf[1]='Star.BlackStar';",
+                        "  banf[2]='Star.BlackHole';",
+                        "  banf[3]='Star.BlackHoleStellaris';",
+                        "  banf[4]='Star.Solar';",
+                        "  banf[5]='Star.WhiteStar';",
+                        "  banf[6]='Star.YellowStar';",
+                        "  banf[7]='Star.OrangeStar';",
+                        "  banf[8]='Star.BlueGiant';",
+                        "  banf[9]='Star.OrangeMidget';",
+                        "  banf[10]='Star.PurpleStar';",
+                        "  // очистим еще один старый массив и заполним их количеством спавна",
+                        "  free(bans);",
+                        "  arraychange(bans,11);",
+                        "  bans[0]=3;",
+                        "  bans[1]=3;",
+                        "  bans[2]=2;",
+                        "  bans[3]=2;",
+                        "  bans[4]=4;",
+                        "  bans[5]=2;",
+                        "  bans[6]=2;",
+                        "  bans[7]=2;",
+                        "  bans[8]=2;",
+                        "  bans[9]=2;",
+                        "  bans[10]=2;",
+                        "  // раскидаем звезды по галактике",
+                        "  bansys=newarray(1);",
+                        "  bansys[0]=300;",
+                        "  m=0;",
+                        "  r=0;",
+                        "  while (m<ArrayDim(banf))",
+                        "  {",
+                        "      for (i=0;i<bans[m];i=i+1)",
+                        "      {",
+                        "          z=0;",
+                        "          while (z!=1)",
+                        "          {",
+                        "              r=0;",
+                        "              systema=Rnd(0,GalaxyStars()-1);",
+                        "              for (n=0;n<ArrayDim(bansys);n=n+1)",
+                        "              {",
+                        "                  if(systema==bansys[n])",
+                        "                  {",
+                        "                      r=1;",
+                        "                      break;",
+                        "                  }",
+                        "              }",
+                        "              if(r==0) z=1;",
+                        "          }",
+                        "          StarSetGraph(GalaxyStar(systema),banf[m]);",
+                        "          ArrayAdd(bansys,systema);",
+                        "      }",
+                        "      m=m+1;",
+                        "  }",
+                        "  ShipOut(Player());"
+                    ]
+                }
+            ],
+            "Planets": 
+            [
+                {
+                    "Type": "TPlanet",
+                    "Name": "PlanetNew",
+                    "Pos.x": 190,
+                    "Pos.y": 160,
+                    "Parent": -1,
+                    "#": 0,
+                    "Race": 62,
+                    "Owner": 62,
+                    "Economy": 14,
+                    "Goverment": 62,
+                    "RangeMin": 0,
+                    "RangeMax": 100,
+                    "Dialog": -1
+                }
+            ],
+            "Ships": 
+            [
+                {
+                    "Type": "TStarShip",
+                    "Name": "",
+                    "Pos.x": 190,
+                    "Pos.y": 100,
+                    "Parent": -1,
+                    "#": 0,
+                    "Count": 1,
+                    "Owner": 62,
+                    "Ship.Type": 126,
+                    "Player": true,
+                    "SpeedMin": 0,
+                    "SpeedMax": 10000,
+                    "Weapon": 0,
+                    "CargoHook": 0,
+                    "EmptySpace": 0,
+                    "StatusTraderMin": 0,
+                    "StatusTraderMax": 100,
+                    "StatusWarriorMin": 0,
+                    "StatusWarriorMax": 100,
+                    "StatusPirateMin": 0,
+                    "StatusPirateMax": 100,
+                    "StrengthMin": "0",
+                    "StrengthMax": "0",
+                    "Ruins": ""
+                }
+            ],
+            "Stars": 
+            [
+                {
+                    "Type": "TStar",
+                    "Name": "StarNew",
+                    "Pos.x": 190,
+                    "Pos.y": 130,
+                    "Parent": -1,
+                    "#": 0,
+                    "Constellation": -1,
+                    "Priority": 0,
+                    "NoKling": false,
+                    "NoComeKling": false
+                }
+            ],
+            "States": 
+            [
+                {
+                    "Type": "TState",
+                    "Name": "StateNew",
+                    "Pos.x": 190,
+                    "Pos.y": 220,
+                    "Parent": -1,
+                    "#": 0,
+                    "Move": 0,
+                    "MoveObj": -1,
+                    "Attack.Count": 0,
+                    "TakeItem": -1,
+                    "TakeAllItem": false,
+                    "OnTalk": "",
+                    "OnActCode": "",
+                    "EType": 0,
+                    "EUnique": "",
+                    "EMsg": ""
+                }
+            ],
+            "Variables": 
+            [
+                {
+                    "Type": "TVar",
+                    "Name": "i",
+                    "Pos.x": 410,
+                    "Pos.y": 240,
+                    "Parent": -1,
+                    "#": 0,
+                    "Var.Type": "Int",
+                    "Init": "0",
+                    "Global": false
+                },
+                {
+                    "Type": "TVar",
+                    "Name": "bans",
+                    "Pos.x": 350,
+                    "Pos.y": 120,
+                    "Parent": -1,
+                    "#": 0,
+                    "Var.Type": "Unknown",
+                    "Init": "None",
+                    "Global": false
+                },
+                {
+                    "Type": "TVar",
+                    "Name": "m",
+                    "Pos.x": 410,
+                    "Pos.y": 220,
+                    "Parent": -1,
+                    "#": 0,
+                    "Var.Type": "Int",
+                    "Init": "0",
+                    "Global": false
+                },
+                {
+                    "Type": "TVar",
+                    "Name": "n",
+                    "Pos.x": 410,
+                    "Pos.y": 200,
+                    "Parent": -1,
+                    "#": 0,
+                    "Var.Type": "Int",
+                    "Init": "0",
+                    "Global": false
+                },
+                {
+                    "Type": "TVar",
+                    "Name": "systema",
+                    "Pos.x": 350,
+                    "Pos.y": 140,
+                    "Parent": -1,
+                    "#": 0,
+                    "Var.Type": "Dword",
+                    "Init": "0",
+                    "Global": false
+                },
+                {
+                    "Type": "TVar",
+                    "Name": "r",
+                    "Pos.x": 350,
+                    "Pos.y": 240,
+                    "Parent": -1,
+                    "#": 0,
+                    "Var.Type": "Int",
+                    "Init": "0",
+                    "Global": false
+                },
+                {
+                    "Type": "TVar",
+                    "Name": "fon",
+                    "Pos.x": 440,
+                    "Pos.y": 120,
+                    "Parent": -1,
+                    "#": 0,
+                    "Var.Type": "Dword",
+                    "Init": "0",
+                    "Global": false
+                },
+                {
+                    "Type": "TVar",
+                    "Name": "banf",
+                    "Pos.x": 440,
+                    "Pos.y": 100,
+                    "Parent": -1,
+                    "#": 0,
+                    "Var.Type": "Unknown",
+                    "Init": "None",
+                    "Global": false
+                },
+                {
+                    "Type": "TVar",
+                    "Name": "f",
+                    "Pos.x": 350,
+                    "Pos.y": 200,
+                    "Parent": -1,
+                    "#": 0,
+                    "Var.Type": "Int",
+                    "Init": "0",
+                    "Global": false
+                },
+                {
+                    "Type": "TVar",
+                    "Name": "z",
+                    "Pos.x": 350,
+                    "Pos.y": 220,
+                    "Parent": -1,
+                    "#": 0,
+                    "Var.Type": "Int",
+                    "Init": "0",
+                    "Global": false
+                },
+                {
+                    "Type": "TVar",
+                    "Name": "bansys",
+                    "Pos.x": 350,
+                    "Pos.y": 100,
+                    "Parent": -1,
+                    "#": 0,
+                    "Var.Type": "Unknown",
+                    "Init": "None",
+                    "Global": false
+                }
+            ]
+        }
+    ],
+    "Visual.Links": 
+    [
+        {
+            "Type": "TGraphLink",
+            "Begin": 13,
+            "End": 12,
+            "Nom": 0,
+            "Arrow": true
+        },
+        {
+            "Type": "TGraphLink",
+            "Begin": 14,
+            "End": 12,
+            "Nom": 0,
+            "Arrow": true
+        },
+        {
+            "Type": "TGraphLink",
+            "Begin": 16,
+            "End": 13,
+            "Nom": 0,
+            "Arrow": true
+        },
+        {
+            "Type": "TGraphLink",
+            "Begin": 16,
+            "End": 15,
+            "Nom": 0,
+            "Arrow": true
+        }
+    ],
+    "BlockPar.EC.Total.Strings": 14,
+    "BlockPar.EC": 
+    [
+        {
+            "#": "0",
+            "String": "Data.Script.Mod_EvoBG"
+        },
+        {
+            "#": "1",
+            "String": "Mod_EvoBG"
+        },
+        {
+            "#": "10",
+            "String": "Star.OrangeStar"
+        },
+        {
+            "#": "11",
+            "String": "Star.BlueGiant"
+        },
+        {
+            "#": "12",
+            "String": "Star.OrangeMidget"
+        },
+        {
+            "#": "13",
+            "String": "Star.PurpleStar"
+        },
+        {
+            "#": "2",
+            "String": "Data.Last_Fone"
+        },
+        {
+            "#": "3",
+            "String": "Star.NeutronStar"
+        },
+        {
+            "#": "4",
+            "String": "Star.BlackStar"
+        },
+        {
+            "#": "5",
+            "String": "Star.BlackHole"
+        },
+        {
+            "#": "6",
+            "String": "Star.BlackHoleStellaris"
+        },
+        {
+            "#": "7",
+            "String": "Star.Solar"
+        },
+        {
+            "#": "8",
+            "String": "Star.WhiteStar"
+        },
+        {
+            "#": "9",
+            "String": "Star.YellowStar"
+        }
+    ]
+}

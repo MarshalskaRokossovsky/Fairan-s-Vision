@@ -1,0 +1,321 @@
+{
+    "FileID": 573785173,
+    "FileVersion": 8,
+    "ViewPos.x": -545,
+    "ViewPos.y": -396,
+    "ScriptName": "FW",
+    "ScriptFileOut": "D:\\script.scr",
+    "ScriptTextOut": "D:\\script_rus.txt",
+    "LangDatIn": "",
+    "LangDatOut": "",
+    "MainDatIn": "",
+    "MainDatOut": "",
+    "CacheDatIn": "",
+    "CacheDatOut": "",
+    "ExportLang": false,
+    "Visual.Objects": 
+    [
+        {
+            "Groups": 
+            [
+                {
+                    "Type": "TGroup",
+                    "Name": "GroupNew",
+                    "Pos.x": 100,
+                    "Pos.y": 190,
+                    "Parent": -1,
+                    "#": 0,
+                    "Owner": 62,
+                    "Group.Type": 126,
+                    "CntShipMin": 1,
+                    "CntShipMax": 1,
+                    "SpeedMin": 100,
+                    "SpeedMax": 10000,
+                    "Weapon": 0,
+                    "CargoHook": 0,
+                    "EmptySpace": 0,
+                    "AddPlayer": true,
+                    "StatusTraderMin": 0,
+                    "StatusTraderMax": 100,
+                    "StatusWarriorMin": 0,
+                    "StatusWarriorMax": 100,
+                    "StatusPirateMin": 0,
+                    "StatusPirateMax": 100,
+                    "DistSearch": 10000,
+                    "Dialog": -1,
+                    "StrengthMin": "0",
+                    "StrengthMax": "0",
+                    "Ruins": ""
+                }
+            ],
+            "Operations": 
+            [
+                {
+                    "Type": "Top",
+                    "Name": "",
+                    "Pos.x": 230,
+                    "Pos.y": 160,
+                    "Parent": -1,
+                    "#": 0,
+                    "Code.Type": "Global",
+                    "Code": 
+                    [
+                        "if(GalaxyTechLevel()>=CT('Items.Weapon.CustomWeapon.BBG_6174.TechLevel')) {",
+                        "    GRun();",
+                        "  }"
+                    ]
+                },
+                {
+                    "Type": "Top",
+                    "Name": "",
+                    "Pos.x": 230,
+                    "Pos.y": 120,
+                    "Parent": -1,
+                    "#": 0,
+                    "Code.Type": "Turn",
+                    "Code": 
+                    [
+                        "timer=timer+1;",
+                        "if(timer>250+((sqr(GalaxyDiffLevels(2))/50)+(sqr(GalaxyDiffLevels(4))/100))/2) {",
+                        "  text='Items.Weapon.CustomWeapon.BBG_6174.';",
+                        "  cur_item=InventNewCustomWeapon('BBG_6174');",
+                        "  SetCustomWeaponSE(cur_item,'Weapon.8','Weapon.AuraEffect','',21);",
+                        "  SetCustomWeaponPrimaryData(cur_item,CT(text+'TechLevel'),t_Weapon12,t_Weapon16);",
+                        "  SetCustomWeaponSizeAndCost(cur_item,CT(text+'kCost'),CT(text+'AverageSize'));",
+                        "  SetCustomWeaponShotData(cur_item,CT(text+'ShotType'),CT(text+'Speed'),CT(text+'AverageRadius'),CT(text+'SecondaryDamageRadius'),CT(text+'MiningFactor'));",
+                        "  SetCustomWeaponAvailability(cur_item,CT(text+'StoreAvailability'));",
+                        "  SetCustomWeaponDamageData(cur_item,CT(text+'MinDamage'),CT(text+'MaxDamage'),CT(text+'DamageSet'));",
+                        "  ShipOut(Player());",
+                        "}"
+                    ]
+                }
+            ],
+            "Planets": 
+            [
+                {
+                    "Type": "TPlanet",
+                    "Name": "PlanetNew",
+                    "Pos.x": 100,
+                    "Pos.y": 160,
+                    "Parent": -1,
+                    "#": 0,
+                    "Race": 62,
+                    "Owner": 62,
+                    "Economy": 14,
+                    "Goverment": 62,
+                    "RangeMin": 0,
+                    "RangeMax": 100,
+                    "Dialog": -1
+                }
+            ],
+            "Ships": 
+            [
+                {
+                    "Type": "TStarShip",
+                    "Name": "",
+                    "Pos.x": 100,
+                    "Pos.y": 100,
+                    "Parent": -1,
+                    "#": 0,
+                    "Count": 1,
+                    "Owner": 62,
+                    "Ship.Type": 126,
+                    "Player": true,
+                    "SpeedMin": 0,
+                    "SpeedMax": 10000,
+                    "Weapon": 0,
+                    "CargoHook": 0,
+                    "EmptySpace": 0,
+                    "StatusTraderMin": 0,
+                    "StatusTraderMax": 100,
+                    "StatusWarriorMin": 0,
+                    "StatusWarriorMax": 100,
+                    "StatusPirateMin": 0,
+                    "StatusPirateMax": 100,
+                    "StrengthMin": "0",
+                    "StrengthMax": "0",
+                    "Ruins": ""
+                }
+            ],
+            "Stars": 
+            [
+                {
+                    "Type": "TStar",
+                    "Name": "StarNew",
+                    "Pos.x": 100,
+                    "Pos.y": 130,
+                    "Parent": -1,
+                    "#": 0,
+                    "Constellation": -1,
+                    "Priority": 0,
+                    "NoKling": false,
+                    "NoComeKling": false
+                }
+            ],
+            "States": 
+            [
+                {
+                    "Type": "TState",
+                    "Name": "StateNew",
+                    "Pos.x": 100,
+                    "Pos.y": 220,
+                    "Parent": -1,
+                    "#": 0,
+                    "Move": 0,
+                    "MoveObj": -1,
+                    "Attack.Count": 0,
+                    "TakeItem": -1,
+                    "TakeAllItem": false,
+                    "OnTalk": "",
+                    "OnActCode": "",
+                    "EType": 0,
+                    "EUnique": "",
+                    "EMsg": ""
+                }
+            ],
+            "Variables": 
+            [
+                {
+                    "Type": "TVar",
+                    "Name": "cur_item",
+                    "Pos.x": 290,
+                    "Pos.y": 130,
+                    "Parent": -1,
+                    "#": 0,
+                    "Var.Type": "Dword",
+                    "Init": "0",
+                    "Global": false
+                },
+                {
+                    "Type": "TVar",
+                    "Name": "text",
+                    "Pos.x": 290,
+                    "Pos.y": 110,
+                    "Parent": -1,
+                    "#": 0,
+                    "Var.Type": "Str",
+                    "Init": "",
+                    "Global": false
+                },
+                {
+                    "Type": "TVar",
+                    "Name": "timer",
+                    "Pos.x": 290,
+                    "Pos.y": 90,
+                    "Parent": -1,
+                    "#": 0,
+                    "Var.Type": "Int",
+                    "Init": "0",
+                    "Global": false
+                }
+            ]
+        }
+    ],
+    "Visual.Links": 
+    [
+        {
+            "Type": "TGraphLink",
+            "Begin": 6,
+            "End": 5,
+            "Nom": 0,
+            "Arrow": true
+        },
+        {
+            "Type": "TGraphLink",
+            "Begin": 7,
+            "End": 5,
+            "Nom": 0,
+            "Arrow": true
+        },
+        {
+            "Type": "TGraphLink",
+            "Begin": 9,
+            "End": 6,
+            "Nom": 0,
+            "Arrow": true
+        },
+        {
+            "Type": "TGraphLink",
+            "Begin": 9,
+            "End": 8,
+            "Nom": 0,
+            "Arrow": true
+        }
+    ],
+    "BlockPar.EC.Total.Strings": 18,
+    "BlockPar.EC": 
+    [
+        {
+            "#": "0",
+            "String": "Items.Weapon.CustomWeapon.BBG_6174.TechLevel"
+        },
+        {
+            "#": "1",
+            "String": "Items.Weapon.CustomWeapon.BBG_6174."
+        },
+        {
+            "#": "10",
+            "String": "Speed"
+        },
+        {
+            "#": "11",
+            "String": "AverageRadius"
+        },
+        {
+            "#": "12",
+            "String": "SecondaryDamageRadius"
+        },
+        {
+            "#": "13",
+            "String": "MiningFactor"
+        },
+        {
+            "#": "14",
+            "String": "StoreAvailability"
+        },
+        {
+            "#": "15",
+            "String": "MinDamage"
+        },
+        {
+            "#": "16",
+            "String": "MaxDamage"
+        },
+        {
+            "#": "17",
+            "String": "DamageSet"
+        },
+        {
+            "#": "2",
+            "String": "BBG_6174"
+        },
+        {
+            "#": "3",
+            "String": "Weapon.8"
+        },
+        {
+            "#": "4",
+            "String": "Weapon.AuraEffect"
+        },
+        {
+            "#": "5",
+            "String": ""
+        },
+        {
+            "#": "6",
+            "String": "TechLevel"
+        },
+        {
+            "#": "7",
+            "String": "kCost"
+        },
+        {
+            "#": "8",
+            "String": "AverageSize"
+        },
+        {
+            "#": "9",
+            "String": "ShotType"
+        }
+    ]
+}

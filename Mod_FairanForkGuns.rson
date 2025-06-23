@@ -1,0 +1,421 @@
+{
+    "FileID": 573785173,
+    "FileVersion": 8,
+    "ViewPos.x": -379,
+    "ViewPos.y": -387,
+    "ScriptName": "Mod_FairanForkGuns",
+    "ScriptFileOut": "D:\\script.scr",
+    "ScriptTextOut": "D:\\script_rus.txt",
+    "LangDatIn": "",
+    "LangDatOut": "",
+    "MainDatIn": "",
+    "MainDatOut": "",
+    "CacheDatIn": "",
+    "CacheDatOut": "",
+    "ExportLang": false,
+    "Visual.Objects": 
+    [
+        {
+            "Groups": 
+            [
+                {
+                    "Type": "TGroup",
+                    "Name": "GroupNew",
+                    "Pos.x": 200,
+                    "Pos.y": 240,
+                    "Parent": -1,
+                    "#": 0,
+                    "Owner": 62,
+                    "Group.Type": 126,
+                    "CntShipMin": 1,
+                    "CntShipMax": 1,
+                    "SpeedMin": 100,
+                    "SpeedMax": 10000,
+                    "Weapon": 0,
+                    "CargoHook": 0,
+                    "EmptySpace": 0,
+                    "AddPlayer": true,
+                    "StatusTraderMin": 0,
+                    "StatusTraderMax": 100,
+                    "StatusWarriorMin": 0,
+                    "StatusWarriorMax": 100,
+                    "StatusPirateMin": 0,
+                    "StatusPirateMax": 100,
+                    "DistSearch": 10000,
+                    "Dialog": -1,
+                    "StrengthMin": "0",
+                    "StrengthMax": "0",
+                    "Ruins": ""
+                }
+            ],
+            "Operations": 
+            [
+                {
+                    "Type": "Top",
+                    "Name": "",
+                    "Pos.x": 320,
+                    "Pos.y": 160,
+                    "Parent": -1,
+                    "#": 0,
+                    "Code.Type": "Global",
+                    "Code": 
+                    [
+                        "GRun();"
+                    ]
+                },
+                {
+                    "Type": "Top",
+                    "Name": "",
+                    "Pos.x": 360,
+                    "Pos.y": 160,
+                    "Parent": -1,
+                    "#": 0,
+                    "Code.Type": "Init",
+                    "Code": 
+                    [
+                        "InventMolderNewGuns();",
+                        "  gunUpdateCheck=CT('Items.Weapon.CustomWeapon.StatsVersion.FairanForkGuns');",
+                        "",
+                        "  //Функция для объявления и обновления кастомных орудий",
+                        "  function InventMolderNewGuns()",
+                        "  {",
+                        "      for(i=1;i<=CT('Items.Weapon.CustomWeapon.FairanForkGuns.Count');i=i+1)",
+                        "      {",
+                        "          //По очереди выбираем системное название каждой новой пушки из Lang",
+                        "          tstr=CT('Items.Weapon.CustomWeapon.FairanForkGuns.'+i);",
+                        "          tstr2='Items.Weapon.CustomWeapon.';",
+                        "          //Прописываем пушку/сбрасываем уже прописанную пушку до уровня базовой из оригинальной игры",
+                        "          temp_dword=InventNewCustomWeapon(tstr,t_Weapon1-1+CT('Items.Weapon.OriginalWeaponType.'+CT(tstr2+tstr+'.BaseGun')));",
+                        "          //Задаём характеристики оружия",
+                        "          SetCustomWeaponShotData(temp_dword,CT(tstr2+tstr+'.ShotType'),CT(tstr2+tstr+'.Speed'),CT(tstr2+tstr+'.AverageRadius'),CT(tstr2+tstr+'.SecondaryDamageRadius'),CT(tstr2+tstr+'.MiningFactor'),CT(tstr2+tstr+'.ShotsPerTurn'));",
+                        "          SetCustomWeaponDamageData(temp_dword,CT(tstr2+tstr+'.MinDamage'),CT(tstr2+tstr+'.MaxDamage'),CT(tstr2+tstr+'.DamageSet'),CT(tstr2+tstr+'.mWeaponDamage'));",
+                        "          SetCustomMissileWeaponStats(temp_dword,CT(tstr2+tstr+'.MissileRadius'),CT(tstr2+tstr+'.MissileMaxSpeed'),CT(tstr2+tstr+'.MissileMinSpeed'),CT(tstr2+tstr+'.MissileChanceToBeHit'));",
+                        "          SetCustomWeaponPrimaryData(temp_dword,CT(tstr2+tstr+'.TechLevel'),t_Weapon1-1+CT('Items.Weapon.OriginalWeaponType.'+CT(tstr2+tstr+'.InventTechLevel')),t_Weapon1-1+CT('Items.Weapon.OriginalWeaponType.'+CT(tstr2+tstr+'.ArcadeType')));",
+                        "          SetCustomWeaponSizeAndCost(temp_dword,CT(tstr2+tstr+'.kCost'),CT(tstr2+tstr+'.AverageSize'));",
+                        "          SetCustomWeaponAvailability(temp_dword,CT(tstr2+tstr+'.StoreAvailability'));",
+                        "          SetCustomWeaponSE(temp_dword,CT(tstr2+tstr+'.ShotEffectPath'),CT(tstr2+tstr+'.SplashEffectPath'),CT(tstr2+tstr+'.MissileExplosionEffectPath'),CT(tstr2+tstr+'.ShotEffectPalette'));",
+                        "      }",
+                        "  }"
+                    ]
+                },
+                {
+                    "Type": "Top",
+                    "Name": "",
+                    "Pos.x": 340,
+                    "Pos.y": 200,
+                    "Parent": -1,
+                    "#": 0,
+                    "Code.Type": "Turn",
+                    "Code": 
+                    [
+                        "if(!ShipIsTakeoff(Player())) {",
+                        "    //Автоматическое обновление характеристик кастомных орудий",
+                        "    //Срабатывает, только если параметр StatsVersion для FairanForkGuns был изменён",
+                        "    if(gunUpdateCheck!=CT('Items.Weapon.CustomWeapon.StatsVersion.FairanForkGuns'))",
+                        "    {",
+                        "        InventMolderNewGuns();",
+                        "        gunUpdateCheck=CT('Items.Weapon.CustomWeapon.StatsVersion.FairanForkGuns');",
+                        "    }",
+                        "  }"
+                    ]
+                }
+            ],
+            "Planets": 
+            [
+                {
+                    "Type": "TPlanet",
+                    "Name": "PlanetNew",
+                    "Pos.x": 200,
+                    "Pos.y": 210,
+                    "Parent": -1,
+                    "#": 0,
+                    "Race": 62,
+                    "Owner": 62,
+                    "Economy": 14,
+                    "Goverment": 62,
+                    "RangeMin": 0,
+                    "RangeMax": 100,
+                    "Dialog": -1
+                }
+            ],
+            "Ships": 
+            [
+                {
+                    "Type": "TStarShip",
+                    "Name": "",
+                    "Pos.x": 200,
+                    "Pos.y": 150,
+                    "Parent": -1,
+                    "#": 0,
+                    "Count": 1,
+                    "Owner": 62,
+                    "Ship.Type": 126,
+                    "Player": true,
+                    "SpeedMin": 0,
+                    "SpeedMax": 10000,
+                    "Weapon": 0,
+                    "CargoHook": 0,
+                    "EmptySpace": 0,
+                    "StatusTraderMin": 0,
+                    "StatusTraderMax": 100,
+                    "StatusWarriorMin": 0,
+                    "StatusWarriorMax": 100,
+                    "StatusPirateMin": 0,
+                    "StatusPirateMax": 100,
+                    "StrengthMin": "0",
+                    "StrengthMax": "0",
+                    "Ruins": ""
+                }
+            ],
+            "Stars": 
+            [
+                {
+                    "Type": "TStar",
+                    "Name": "StarNew",
+                    "Pos.x": 200,
+                    "Pos.y": 180,
+                    "Parent": -1,
+                    "#": 0,
+                    "Constellation": -1,
+                    "Priority": 0,
+                    "NoKling": false,
+                    "NoComeKling": false
+                }
+            ],
+            "States": 
+            [
+                {
+                    "Type": "TState",
+                    "Name": "StateNew",
+                    "Pos.x": 200,
+                    "Pos.y": 270,
+                    "Parent": -1,
+                    "#": 0,
+                    "Move": 0,
+                    "MoveObj": -1,
+                    "Attack.Count": 0,
+                    "TakeItem": -1,
+                    "TakeAllItem": false,
+                    "OnTalk": "",
+                    "OnActCode": "",
+                    "EType": 0,
+                    "EUnique": "",
+                    "EMsg": ""
+                }
+            ],
+            "Variables": 
+            [
+                {
+                    "Type": "TVar",
+                    "Name": "temp_dword",
+                    "Pos.x": 430,
+                    "Pos.y": 160,
+                    "Parent": -1,
+                    "#": 0,
+                    "Var.Type": "Dword",
+                    "Init": "0",
+                    "Global": false
+                },
+                {
+                    "Type": "TVar",
+                    "Name": "gunUpdateCheck",
+                    "Pos.x": 430,
+                    "Pos.y": 180,
+                    "Parent": -1,
+                    "#": 0,
+                    "Var.Type": "Str",
+                    "Init": "",
+                    "Global": false
+                },
+                {
+                    "Type": "TVar",
+                    "Name": "tstr2",
+                    "Pos.x": 430,
+                    "Pos.y": 220,
+                    "Parent": -1,
+                    "#": 0,
+                    "Var.Type": "Str",
+                    "Init": "",
+                    "Global": false
+                },
+                {
+                    "Type": "TVar",
+                    "Name": "tstr",
+                    "Pos.x": 430,
+                    "Pos.y": 200,
+                    "Parent": -1,
+                    "#": 0,
+                    "Var.Type": "Str",
+                    "Init": "",
+                    "Global": false
+                },
+                {
+                    "Type": "TVar",
+                    "Name": "i",
+                    "Pos.x": 510,
+                    "Pos.y": 200,
+                    "Parent": -1,
+                    "#": 0,
+                    "Var.Type": "Int",
+                    "Init": "0",
+                    "Global": false
+                }
+            ]
+        }
+    ],
+    "Visual.Links": 
+    [
+        {
+            "Type": "TGraphLink",
+            "Begin": 9,
+            "End": 8,
+            "Nom": 0,
+            "Arrow": true
+        },
+        {
+            "Type": "TGraphLink",
+            "Begin": 10,
+            "End": 8,
+            "Nom": 0,
+            "Arrow": true
+        },
+        {
+            "Type": "TGraphLink",
+            "Begin": 12,
+            "End": 9,
+            "Nom": 0,
+            "Arrow": true
+        },
+        {
+            "Type": "TGraphLink",
+            "Begin": 12,
+            "End": 11,
+            "Nom": 0,
+            "Arrow": true
+        }
+    ],
+    "BlockPar.EC.Total.Strings": 30,
+    "BlockPar.EC": 
+    [
+        {
+            "#": "0",
+            "String": "Items.Weapon.CustomWeapon.StatsVersion.FairanForkGuns"
+        },
+        {
+            "#": "1",
+            "String": "Items.Weapon.CustomWeapon.FairanForkGuns.Count"
+        },
+        {
+            "#": "10",
+            "String": ".MiningFactor"
+        },
+        {
+            "#": "11",
+            "String": ".ShotsPerTurn"
+        },
+        {
+            "#": "12",
+            "String": ".MinDamage"
+        },
+        {
+            "#": "13",
+            "String": ".MaxDamage"
+        },
+        {
+            "#": "14",
+            "String": ".DamageSet"
+        },
+        {
+            "#": "15",
+            "String": ".mWeaponDamage"
+        },
+        {
+            "#": "16",
+            "String": ".MissileRadius"
+        },
+        {
+            "#": "17",
+            "String": ".MissileMaxSpeed"
+        },
+        {
+            "#": "18",
+            "String": ".MissileMinSpeed"
+        },
+        {
+            "#": "19",
+            "String": ".MissileChanceToBeHit"
+        },
+        {
+            "#": "2",
+            "String": "Items.Weapon.CustomWeapon.FairanForkGuns."
+        },
+        {
+            "#": "20",
+            "String": ".TechLevel"
+        },
+        {
+            "#": "21",
+            "String": ".InventTechLevel"
+        },
+        {
+            "#": "22",
+            "String": ".ArcadeType"
+        },
+        {
+            "#": "23",
+            "String": ".kCost"
+        },
+        {
+            "#": "24",
+            "String": ".AverageSize"
+        },
+        {
+            "#": "25",
+            "String": ".StoreAvailability"
+        },
+        {
+            "#": "26",
+            "String": ".ShotEffectPath"
+        },
+        {
+            "#": "27",
+            "String": ".SplashEffectPath"
+        },
+        {
+            "#": "28",
+            "String": ".MissileExplosionEffectPath"
+        },
+        {
+            "#": "29",
+            "String": ".ShotEffectPalette"
+        },
+        {
+            "#": "3",
+            "String": "Items.Weapon.CustomWeapon."
+        },
+        {
+            "#": "4",
+            "String": "Items.Weapon.OriginalWeaponType."
+        },
+        {
+            "#": "5",
+            "String": ".BaseGun"
+        },
+        {
+            "#": "6",
+            "String": ".ShotType"
+        },
+        {
+            "#": "7",
+            "String": ".Speed"
+        },
+        {
+            "#": "8",
+            "String": ".AverageRadius"
+        },
+        {
+            "#": "9",
+            "String": ".SecondaryDamageRadius"
+        }
+    ]
+}
