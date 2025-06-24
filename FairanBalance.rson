@@ -192,22 +192,22 @@
         },
         {
             "Type": "TGraphLink",
-            "Begin": 5,
-            "End": 3,
+            "Begin": 4,
+            "End": 1,
             "Nom": 0,
             "Arrow": true
         },
         {
             "Type": "TGraphLink",
-            "Begin": 7,
-            "End": 4,
+            "Begin": 1,
+            "End": 0,
             "Nom": 0,
             "Arrow": true
         },
         {
             "Type": "TGraphLink",
-            "Begin": 7,
-            "End": 6,
+            "Begin": 2,
+            "End": 0,
             "Nom": 0,
             "Arrow": true
         }

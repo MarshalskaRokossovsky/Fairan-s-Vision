@@ -274,22 +274,22 @@
         },
         {
             "Type": "TGraphLink",
-            "Begin": 10,
-            "End": 8,
+            "Begin": 7,
+            "End": 5,
             "Nom": 0,
             "Arrow": true
         },
         {
             "Type": "TGraphLink",
-            "Begin": 12,
-            "End": 9,
+            "Begin": 6,
+            "End": 5,
             "Nom": 0,
             "Arrow": true
         },
         {
             "Type": "TGraphLink",
-            "Begin": 12,
-            "End": 11,
+            "Begin": 9,
+            "End": 6,
             "Nom": 0,
             "Arrow": true
         }

@@ -226,20 +226,6 @@
             "End": 5,
             "Nom": 0,
             "Arrow": true
-        },
-        {
-            "Type": "TGraphLink",
-            "Begin": 9,
-            "End": 6,
-            "Nom": 0,
-            "Arrow": true
-        },
-        {
-            "Type": "TGraphLink",
-            "Begin": 9,
-            "End": 8,
-            "Nom": 0,
-            "Arrow": true
         }
     ],
     "BlockPar.EC.Total.Strings": 18,
